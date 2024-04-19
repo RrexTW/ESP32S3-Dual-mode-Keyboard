@@ -69,9 +69,11 @@ void scan_keyboard() {
     for (int i = 0; i < ROWS; i++) {
         gpio_set_level(rowPins[i], 0);
         for (int j = 0; j < COLS; j++) {
-            if(findpresskey(keyboard[i][j]))
-                if (gpio_get_level(colPins[j]) == 0) {
+            if ((gpio_get_level(colPins[j]) == 0) && !(findpresskey(keyboard[i][j]))){
                 addpresskey(keyboard[i][j]);
+            }
+            else if(gpio_get_level(colPins[j]) == 1 && findpresskey(keyboard[i][j])){
+                removepresskey(keyboard [i][j]);         
             }
 
         }
