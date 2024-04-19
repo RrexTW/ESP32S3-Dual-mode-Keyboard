@@ -46,27 +46,45 @@ uint8_t keyboard[ROWS][COLS] = {
     {HID_KEY_CONTROL_LEFT, KEY_FN, HID_KEY_GUI_LEFT, HID_KEY_ALT_LEFT, HID_KEY_NONE, HID_KEY_NONE, HID_KEY_NONE, HID_KEY_SPACE, HID_KEY_NONE, HID_KEY_NONE, HID_KEY_ALT_RIGHT, KEY_FN, HID_KEY_CONTROL_RIGHT, HID_KEY_ARROW_LEFT, HID_KEY_ARROW_DOWN, HID_KEY_ARROW_RIGHT}
     };
 
-uint8_t keycode[6]={HID_KEY_NONE};
+uint8_t keypress[6]={HID_KEY_NONE};
+
+void findpresskey(uint8_t press)
+    for(int i=0;i<=6;i++){
+        if(keycode[i]==press){
+            return true;
+            break;
+    }
+    return false;
+}
+
+void addpresskey(uint8_t press)
+    for(int i=0;i<=6;i++){
+        if(keycode[i]!=HID_KEY_NONE){
+            keycode[i] = press;
+            break;
+    }
+}
 
 void scan_keyboard() {
     for (int i = 0; i < ROWS; i++) {
         gpio_set_level(rowPins[i], 0);
         for (int j = 0; j < COLS; j++) {
-            if (gpio_get_level(colPins[j]) == 0) {
-                uint8_t keycode[6] = {keyboard[i][j]};
-                ESP_LOGI(TAG, "Sending Keyboard report");
-                tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, keycode);
-                vTaskDelay(100 / portTICK_PERIOD_MS);
-            }else if((gpio_get_level(colPins[j]) == 1)&&( keycode[6] == keyboard[i][j])){
-                tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, NULL);
-                vTaskDelay(100 / portTICK_PERIOD_MS);
+            if(findpresskey(keyboard[i][j]))
+                if (gpio_get_level(colPins[j]) == 0) {
+                addpresskey(keyboard[i][j]);
             }
+
         }
         gpio_set_level(rowPins[i], 1);
     }
 }
 
 
+uint8_t keycode[6] = {keyboard[i][j]};
+                ESP_LOGI(TAG, "Sending Keyboard report");
+                tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, keycode);
+                vTaskDelay(100 / portTICK_PERIOD_MS);
+*/
 
 /************* TinyUSB descriptors ****************/
 
