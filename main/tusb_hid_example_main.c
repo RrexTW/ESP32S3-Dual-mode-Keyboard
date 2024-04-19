@@ -65,12 +65,21 @@ void addpresskey(uint8_t press)
     }
 }
 
+void removepresskey(uint8_t press)
+    for(int i=0;i<=6;i++){
+        if(keycode[i]==press){
+            keycode[i] = HID_KEY_NONE;
+            break;
+    }
+}l
+
 void scan_keyboard() {
     for (int i = 0; i < ROWS; i++) {
         gpio_set_level(rowPins[i], 0);
         for (int j = 0; j < COLS; j++) {
             if ((gpio_get_level(colPins[j]) == 0) && !(findpresskey(keyboard[i][j]))){
                 addpresskey(keyboard[i][j]);
+                vTaskDelay(30 / portTICK_PERIOD_MS);
             }
             else if(gpio_get_level(colPins[j]) == 1 && findpresskey(keyboard[i][j])){
                 removepresskey(keyboard [i][j]);         
@@ -81,12 +90,14 @@ void scan_keyboard() {
     }
 }
 
+void sendkeyboardhid(){
+    ESP_LOGI(TAG, "Sending Keyboard report");
+    tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, keycode);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+}
 
-uint8_t keycode[6] = {keyboard[i][j]};
-                ESP_LOGI(TAG, "Sending Keyboard report");
-                tud_hid_keyboard_report(HID_ITF_PROTOCOL_KEYBOARD, 0, keycode);
-                vTaskDelay(100 / portTICK_PERIOD_MS);
-*/
+
+
 
 /************* TinyUSB descriptors ****************/
 
@@ -257,6 +268,7 @@ void app_main(void)
     init_keyboard();
 
     while (true) {
-        scan_keyboard(); 
+        scan_keyboard();
+        sendkeyboardhid(); 
     }
 }
