@@ -48,28 +48,31 @@ uint8_t keyboard[ROWS][COLS] = {
 
 uint8_t keypress[6]={HID_KEY_NONE};
 
-void findpresskey(uint8_t press)
+void findpresskey(uint8_t press){
     for(int i=0;i<=6;i++){
         if(keycode[i]==press){
             return true;
             break;
+            }
     }
     return false;
 }
 
-void addpresskey(uint8_t press)
+void addpresskey(uint8_t press){
     for(int i=0;i<=6;i++){
         if(keycode[i]!=HID_KEY_NONE){
             keycode[i] = press;
             break;
+        }
     }
 }
 
-void removepresskey(uint8_t press)
+void removepresskey(uint8_t press){
     for(int i=0;i<=6;i++){
         if(keycode[i]==press){
             keycode[i] = HID_KEY_NONE;
             break;
+        }
     }
 }l
 
