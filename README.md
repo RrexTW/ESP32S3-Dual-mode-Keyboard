@@ -25,6 +25,7 @@ The Shift, Ctrl, Win, and Alt keys do not work in Bluetooth mode.
 
 
 
+#
 | Supported Targets | ESP32-S3 |
 | ----------------- | -------- |
 
