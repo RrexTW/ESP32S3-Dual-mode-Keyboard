@@ -1,5 +1,20 @@
-| Supported Targets | ESP32-S2 | ESP32-S3 |
-| ----------------- | -------- | -------- |
+這是一個基於官方ESP-IDF範例庫的雙模鍵盤專案
+This is a dual-mode keyboard project based on the official ESP-IDF example library.
+
+適用於 esp32s3
+This project is made for esp32s3.
+ 
+參考自:
+made by:
+https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_hid
+https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_hid_device_demo
+
+
+
+
+
+| Supported Targets | ESP32-S3 |
+| ----------------- | -------- |
 
 # TinyUSB Human Interface Device Example
 
