@@ -1,3 +1,5 @@
+# Information
+
 這是一個基於官方ESP-IDF範例庫的雙模鍵盤專案
 
 This is a dual-mode keyboard project based on the official ESP-IDF example library.
@@ -5,7 +7,8 @@ This is a dual-mode keyboard project based on the official ESP-IDF example libra
 適用於 esp32s3
 
 This project is made for esp32s3.
- 
+
+
 參考自:
 
 made by:
@@ -14,6 +17,11 @@ https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device
 https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_hid_device_demo
 
 
+# To Do
+
+藍芽模式下Shift、Ctrl、Win、Alt鍵不起作用
+
+The Shift, Ctrl, Win, and Alt keys do not work in Bluetooth mode.
 
 
 
