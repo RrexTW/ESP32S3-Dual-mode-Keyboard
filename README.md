@@ -18,10 +18,10 @@ https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/bl
 
 
 # To Do
+Capslock 燈
+Capslock light
 
-藍芽模式下Shift、Ctrl、Win、Alt鍵不起作用
 
-The Shift, Ctrl, Win, and Alt keys do not work in Bluetooth mode.
 
 
 
